@@ -7,7 +7,10 @@ package responsitory.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import model.DeGiayJPN;
 
 /**
@@ -33,5 +36,23 @@ public class DeGiayRepository {
             e.printStackTrace(System.out);
         }
         return check > 0;
+    }
+    
+    public List<DeGiayJPN> getAll() {
+        List<DeGiayJPN> ls = new ArrayList<>();
+        try(Connection con = DBConnection.getConnection()) {
+            String sql ="SELECT [Id]\n" +
+"      ,[Made]\n" +
+"      ,[Chatlieude]\n" +
+"      ,[Docaode]\n" +
+"  FROM [dbo].[DEGIAY]";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                ls.add(new DeGiayJPN(rs.getString(1), rs.getString(2), rs.getInt(3)));
+            }
+        } catch (Exception e) {
+        }
+        return ls;
     }
 }
