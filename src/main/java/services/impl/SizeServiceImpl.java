@@ -4,6 +4,7 @@
  */
 package services.impl;
 
+import java.util.List;
 import model.SizeJPN;
 import responsitory.impl.SizeRepository;
 import services.SizeService;
@@ -26,4 +27,19 @@ public class SizeServiceImpl implements SizeService{
             return "Thêm Thất Bại";
         }
     }
+
+    @Override
+    public List<SizeJPN> getAll() {
+        return sr.getAll();
+    }
+
+    @Override
+    public String delete(String ma) {
+        boolean upkh = sr.delete(ma);
+        if(upkh){
+            return "Delete thanh cong";
+        }else{
+            return "Delete that bai";
+        }
+        }
 }

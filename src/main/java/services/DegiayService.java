@@ -4,6 +4,7 @@
  */
 package services;
 
+import java.util.List;
 import model.DeGiayJPN;
 
 
@@ -14,4 +15,7 @@ import model.DeGiayJPN;
  */
 public interface DegiayService {
     String Add(DeGiayJPN dg);
+    List<DeGiayJPN> getAll();
+    String Update(DeGiayJPN dg, String id);
+    String delete(String ma);
 }

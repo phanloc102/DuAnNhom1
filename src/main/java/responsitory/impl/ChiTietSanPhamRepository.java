@@ -21,7 +21,7 @@ public class ChiTietSanPhamRepository {
 
    public List<ChiTietSanPhamJPN> getAll() {
         ArrayList<ChiTietSanPhamJPN> listLh = new ArrayList<>();
-        String sql = "SELECT SP.MASP, SP.TEN, DG.DOCAODE, S.TENSIZE, KD.MAKIEU, MS.MAMAU, CTSP.DONGIA, CTSP.SOLUONG, CTSP.MOTA, CTSP.TRANGTHAI, CTSP.HINHANH, CTSP.IDSP     \n"
+        String sql = "SELECT CTSP.MACTSP, SP.TEN, DG.DOCAODE, S.TENSIZE, KD.TENKIEU, MS.TENMAU, CTSP.DONGIA, CTSP.SOLUONG, CTSP.MOTA, CTSP.TRANGTHAI, CTSP.HINHANH, CTSP.ID     \n"
                 + "FROM            CHITIETSANPHAM CTSP INNER JOIN\n"
                 + "                         DEGIAY DG ON CTSP.Idde = DG.Id INNER JOIN\n"
                 + "                         KIEUDANG KD ON CTSP.Idkieu = KD.Id INNER JOIN\n"
@@ -73,37 +73,34 @@ public class ChiTietSanPhamRepository {
 //"VALUES (?,?,?,?,?,?,?,?,?,?)";
 //        String query = "insert into CHITIETSANPHAM(Idsp,idms,idkieu,idsize,idde,dongia,mota,trangthai,hinhanh,mactsp,soluong)\n"
 //                + "select sp.id,ms.id,kd.id,sz.id,de.id,?,?,?,? from SANPHAM sp,MAUSAC ms,KIEUDANG kd, SIZE sz,DEGIAY de where sp.Masp = ? AND sp.Soluong = ? AND sp.Ten=? AND ms.Mamau=? AND kd.Makieu= ? and sz.Tensize = ? AND de.Docaode = ?";
-        String query = "INSERT INTO [dbo].[SANPHAM]\n"
-                + "           ([Masp]\n"
-                + "           ,[Ten])\n"
-                + "     VALUES\n"
-                + "           (?,?)\n"
-                + "                insert into CHITIETSANPHAM(idsp,idms,idkieu,idsize,idde,hinhanh,dongia,soluong,mota,trangthai)\n"
+        String query = "insert into CHITIETSANPHAM(idsp,idms,idkieu,idsize,idde,mactsp,hinhanh,dongia,soluong,mota,trangthai)\n"
                 + "                select\n"
-                + "                                 Idsp = (SELECT sp.id from SANPHAM sp WHERE sp.Masp = ? ),\n"
-                + "                               Idms = (SELECT ms.id from MAUSAC ms WHERE ms.Mamau = ?),\n"
-                + "                            Idkieu = (SELECT kd.id from KIEUDANG kd WHERE kd.Makieu = ?),\n"
+                + "                                 Idsp = (SELECT sp.id from SANPHAM sp WHERE sp.Ten = ? ),\n"
+                + "                               Idms = (SELECT ms.id from MAUSAC ms WHERE ms.Tenmau = ?),\n"
+                + "                            Idkieu = (SELECT kd.id from KIEUDANG kd WHERE kd.Tenkieu = ?),\n"
                 + "                             Idsize = (SELECT s.id from SIZE s WHERE s.Tensize = ?),\n"
                 + "                              Idde = (SELECT dg.id from DEGIAY dg WHERE dg.Docaode = ?),\n"
+                + "                                 [Mactsp] = ?,\n"                
                 + "                               [Hinhanh] = ?,\n"
                 + "                                [Dongia] = ?,\n"
                 + "                              [soluong] = ?,\n"
                 + "                               [Mota] = ?,\n"
                 + "                             [Trangthai] = ?";
+        
         int check = 0;
         try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
-            ps.setObject(1, ctsp.getMa());
-            ps.setObject(2, ctsp.getSanPham());
-            ps.setObject(3, ctsp.getMa());
-            ps.setObject(4, ctsp.getMauSac());
-            ps.setObject(5, ctsp.getKieuDang());
-            ps.setObject(6, ctsp.getSize());
-            ps.setObject(7, ctsp.getDeGiay());
-            ps.setObject(8, ctsp.getHinhAnh());
-            ps.setObject(9, ctsp.getDonGia());
-            ps.setObject(10, ctsp.getSoLuong());
-            ps.setObject(11, ctsp.getMoTa());
-            ps.setObject(12, ctsp.getTrangThai());
+            ps.setObject(1, ctsp.getSanPham());
+//            ps.setObject(3, ctsp.getMa());
+            ps.setObject(2, ctsp.getMauSac());
+            ps.setObject(3, ctsp.getKieuDang());
+            ps.setObject(4, ctsp.getSize());
+            ps.setObject(5, ctsp.getDeGiay());
+            ps.setObject(6, ctsp.getMa());
+            ps.setObject(7, ctsp.getHinhAnh());
+            ps.setObject(8, ctsp.getDonGia());
+            ps.setObject(9, ctsp.getSoLuong());
+            ps.setObject(10, ctsp.getMoTa());
+            ps.setObject(11, ctsp.getTrangThai());
             check = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace(System.out);
@@ -113,7 +110,7 @@ public class ChiTietSanPhamRepository {
 
     public boolean delete(String id) {
         String query = "DELETE FROM [dbo].[CHITIETSANPHAM]\n"
-                + "      where idsp like ?";
+                + "      where Id like ?";
         int check = 0;
         try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, id);
@@ -125,38 +122,33 @@ public class ChiTietSanPhamRepository {
     }
 
     public boolean update(ChiTietSanPhamJPN ctsp, String id) {
-        String query = "UPDATE [dbo].[SANPHAM]\n"
-                + "   SET [Masp] = ?\n"
-                + "      ,[Ten] = ?\n"
-                + " WHERE id like ?\n"
-                + "UPDATE [dbo].[CHITIETSANPHAM] \n"
-                + "			SET Idsp = (SELECT sp.id  from SANPHAM sp WHERE sp.Masp = ?)\n"
-                + "                ,Idms = (SELECT ms.id from MAUSAC ms WHERE ms.Mamau = ?)\n"
-                + "                ,Idkieu = (SELECT kd.id from KIEUDANG kd WHERE kd.Makieu = ?)\n"
+        String query = "UPDATE [dbo].[CHITIETSANPHAM] \n"
+                + "			SET Idsp = (SELECT sp.id  from SANPHAM sp WHERE sp.Ten = ?)\n"
+                + "                ,Idms = (SELECT ms.id from MAUSAC ms WHERE ms.Tenmau = ?)\n"
+                + "                ,Idkieu = (SELECT kd.id from KIEUDANG kd WHERE kd.Tenkieu = ?)\n"
                 + "                ,Idsize = (SELECT s.id from SIZE s WHERE s.Tensize = ?)\n"
                 + "                ,Idde = (SELECT dg.id from DEGIAY dg WHERE dg.Docaode = ?)\n"
+                + "                ,[Mactsp] = ?\n"                
                 + "                ,[Dongia] = ?\n"
                 + "                ,[Mota] = ?\n"
                 + "                 ,[Soluong] = ?\n"
                 + "                ,[Trangthai] = ?\n"
                 + "                 ,[Hinhanh] = ?\n"
-                + "				 where idsp like ?";
+                + "				 where id like ?";
         int check = 0;
         try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
-            ps.setObject(1, ctsp.getMa());
-            ps.setObject(2, ctsp.getSanPham());
-            ps.setObject(3, id);
-            ps.setObject(4, ctsp.getMa());
-            ps.setObject(5, ctsp.getMauSac());
-            ps.setObject(6, ctsp.getKieuDang());
-            ps.setObject(7, ctsp.getSize());
-            ps.setObject(8, ctsp.getDeGiay());
-            ps.setObject(9, ctsp.getDonGia());
-            ps.setObject(10, ctsp.getMoTa());
-            ps.setObject(11, ctsp.getSoLuong());
-            ps.setObject(12, ctsp.getTrangThai());
-            ps.setObject(13, ctsp.getHinhAnh());
-            ps.setObject(14, id);
+            ps.setObject(1, ctsp.getSanPham());
+            ps.setObject(2, ctsp.getMauSac());
+            ps.setObject(3, ctsp.getKieuDang());
+            ps.setObject(4, ctsp.getSize());
+            ps.setObject(5, ctsp.getDeGiay());
+            ps.setObject(6, ctsp.getMa());
+            ps.setObject(7, ctsp.getDonGia());
+            ps.setObject(8, ctsp.getMoTa());
+            ps.setObject(9, ctsp.getSoLuong());
+            ps.setObject(10, ctsp.getTrangThai());
+            ps.setObject(11, ctsp.getHinhAnh());
+            ps.setObject(12, id);
             check = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace(System.out);
@@ -166,13 +158,13 @@ public class ChiTietSanPhamRepository {
 
     public List<ChiTietSanPhamJPN> Tk(String ten) {
         ArrayList<ChiTietSanPhamJPN> listLh = new ArrayList<>();
-        String sql = "SELECT SP.MASP, SP.TEN, DG.DOCAODE, S.TENSIZE, KD.MAKIEU, MS.MAMAU, CTSP.DONGIA, CTSP.SOLUONG, CTSP.MOTA, CTSP.TRANGTHAI, CTSP.HINHANH, CTSP.IDSP     \n"
+        String sql = "SELECT CTSP.MACTSP, SP.TEN, DG.DOCAODE, S.TENSIZE, KD.MAKIEU, MS.MAMAU, CTSP.DONGIA, CTSP.SOLUONG, CTSP.MOTA, CTSP.TRANGTHAI, CTSP.HINHANH, CTSP.ID     \n"
                 + "FROM            CHITIETSANPHAM CTSP INNER JOIN\n"
                 + "                         DEGIAY DG ON CTSP.Idde = DG.Id INNER JOIN\n"
                 + "                         KIEUDANG KD ON CTSP.Idkieu = KD.Id INNER JOIN\n"
                 + "                         MAUSAC MS ON CTSP.Idms = MS.Id INNER JOIN\n"
                 + "                         SANPHAM SP ON CTSP.Idsp = SP.Id INNER JOIN\n"
-                + "                         SIZE S ON CTSP.Idsize = S.Id Where SP.TEN =? OR SP.MASP = ?";
+                + "                         SIZE S ON CTSP.Idsize = S.Id Where SP.TEN =? OR CTSP.MACTSP = ?";
         try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setObject(1, ten);
             ps.setObject(2, ten);
@@ -202,13 +194,13 @@ public class ChiTietSanPhamRepository {
 
     public List<ChiTietSanPhamJPN> Loc(String ten) {
         ArrayList<ChiTietSanPhamJPN> listLh = new ArrayList<>();
-        String sql = "SELECT SP.MASP, SP.TEN, DG.DOCAODE, S.TENSIZE, KD.MAKIEU, MS.MAMAU, CTSP.DONGIA, CTSP.SOLUONG, CTSP.MOTA, CTSP.TRANGTHAI, CTSP.HINHANH, CTSP.IDSP     \n"
+        String sql = "SELECT CTSP.MACTSP, SP.TEN, DG.DOCAODE, S.TENSIZE, KD.TENKIEU, MS.TENMAU, CTSP.DONGIA, CTSP.SOLUONG, CTSP.MOTA, CTSP.TRANGTHAI, CTSP.HINHANH, CTSP.ID     \n"
                 + "FROM            CHITIETSANPHAM CTSP INNER JOIN\n"
                 + "                         DEGIAY DG ON CTSP.Idde = DG.Id INNER JOIN\n"
                 + "                         KIEUDANG KD ON CTSP.Idkieu = KD.Id INNER JOIN\n"
                 + "                         MAUSAC MS ON CTSP.Idms = MS.Id INNER JOIN\n"
                 + "                         SANPHAM SP ON CTSP.Idsp = SP.Id INNER JOIN\n"
-                + "                         SIZE S ON CTSP.Idsize = S.Id Where   KD.MAKIEU = ? OR MS.MAMAU = ? ";
+                + "                         SIZE S ON CTSP.Idsize = S.Id Where   KD.TENKIEU = ? OR MS.TENMAU = ? ";
         try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setObject(1, ten);
             ps.setObject(2, ten);
@@ -240,7 +232,7 @@ public class ChiTietSanPhamRepository {
 
     public List<ChiTietSanPhamJPN> Loc1(String ten) {
         ArrayList<ChiTietSanPhamJPN> listLh = new ArrayList<>();
-        String sql = "SELECT SP.MASP, SP.TEN, DG.DOCAODE, S.TENSIZE, KD.MAKIEU, MS.MAMAU, CTSP.DONGIA, CTSP.SOLUONG, CTSP.MOTA, CTSP.TRANGTHAI, CTSP.HINHANH, CTSP.IDSP     \n"
+        String sql = "SELECT CTSP.MACTSP, SP.TEN, DG.DOCAODE, S.TENSIZE, KD.TENKIEU, MS.TENMAU, CTSP.DONGIA, CTSP.SOLUONG, CTSP.MOTA, CTSP.TRANGTHAI, CTSP.HINHANH, CTSP.ID     \n"
                 + "FROM            CHITIETSANPHAM CTSP INNER JOIN\n"
                 + "                         DEGIAY DG ON CTSP.Idde = DG.Id INNER JOIN\n"
                 + "                         KIEUDANG KD ON CTSP.Idkieu = KD.Id INNER JOIN\n"
@@ -276,7 +268,21 @@ public class ChiTietSanPhamRepository {
 
     public List<String> getListMauSac() {
         List<String> list = new ArrayList<>();
-        String query = "Select MAUSAC.MAMAU from MAUSAC ";
+        String query = "Select MAUSAC.TENMAU from MAUSAC ";
+        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String str = rs.getString(1);
+                list.add(str);
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+    
+    public List<String> getListSanPham() {
+        List<String> list = new ArrayList<>();
+        String query = "Select SANPHAM.TEN from SANPHAM ";
         try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -290,7 +296,7 @@ public class ChiTietSanPhamRepository {
 
     public List<String> getListKieuDang() {
         List<String> list = new ArrayList<>();
-        String query = "select KIEUDANG.MAKIEU from KIEUDANG ";
+        String query = "select KIEUDANG.TENKIEU from KIEUDANG ";
         try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {

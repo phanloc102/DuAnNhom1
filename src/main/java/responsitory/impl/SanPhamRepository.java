@@ -23,7 +23,7 @@ public class SanPhamRepository {
                 + "      ,[Masp]\n"
                 + "      ,[Ten]\n"
                 + "  FROM [dbo].[SANPHAM]";
-        try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
+        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             List<SanPhamJPN> listSp = new ArrayList<>();
             while (rs.next()) {
@@ -39,11 +39,11 @@ public class SanPhamRepository {
     public boolean add(SanPhamJPN sp) {
         String query = "INSERT INTO [dbo].[SANPHAM]\n"
                 + "           ([Masp]\n"
-                + "           ,[Ten]\n"
+                + "           ,[Ten])\n"
                 + "     VALUES\n"
                 + "           (?,?)";
         int check = 0;
-        try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
+        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, sp.getMa());
             ps.setObject(2, sp.getTen());
 
@@ -61,7 +61,7 @@ public class SanPhamRepository {
                 + "      ,[Ten] = ?\n"
                 + " WHERE Id like ?";
         int check = 0;
-        try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
+        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, sp.getMa());
             ps.setObject(2, sp.getTen());
 
@@ -77,7 +77,7 @@ public class SanPhamRepository {
         String query = "DELETE FROM [dbo].[SANPHAM]\n"
                 + "      WHERE Id like ?";
         int check = 0;
-        try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
+        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
             ps.setObject(1, id);
             check = ps.executeUpdate();
         } catch (Exception e) {

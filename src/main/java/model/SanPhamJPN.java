@@ -55,7 +55,7 @@ public class SanPhamJPN {
     
     
     public Object[] toDataRow(){
-        return new Object[] {id,ma,ten};
+        return new Object[] {ma,ten};
     }
 
 }

@@ -68,6 +68,8 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService{
     public List<String> getListMauSac() {
         return ctspr.getListMauSac();
     }
+    
+    
 
     @Override
     public List<String> getListKieuDang() {
@@ -98,6 +100,11 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService{
     @Override
     public List<ChiTietSanPhamJPN> Loc1(String ten) {
         return ctspr.Loc1(ten);
+    }
+
+    @Override
+    public List<String> getListSanPham() {
+        return ctspr.getListSanPham();
     }
     }
 

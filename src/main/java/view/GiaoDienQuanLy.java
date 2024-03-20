@@ -73,12 +73,14 @@ public class GiaoDienQuanLy extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jpnMain1111.setBackground(new java.awt.Color(51, 255, 153));
+        jpnMain1111.setBackground(new java.awt.Color(255, 255, 255));
 
-        jpnGiaoDich.setBackground(new java.awt.Color(231, 154, 22));
+        jpnGiaoDich.setBackground(new java.awt.Color(0, 153, 153));
+        jpnGiaoDich.setForeground(new java.awt.Color(255, 255, 255));
 
-        jlbGiaodich.setBackground(new java.awt.Color(249, 167, 27));
-        jlbGiaodich.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jlbGiaodich.setBackground(new java.awt.Color(0, 153, 153));
+        jlbGiaodich.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbGiaodich.setForeground(null);
         jlbGiaodich.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlbGiaodich.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Billboard.png"))); // NOI18N
         jlbGiaodich.setText("GIAO DỊCH");
@@ -87,25 +89,27 @@ public class GiaoDienQuanLy extends javax.swing.JFrame {
         jpnGiaoDich.setLayout(jpnGiaoDichLayout);
         jpnGiaoDichLayout.setHorizontalGroup(
             jpnGiaoDichLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnGiaoDichLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jlbGiaodich, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jlbGiaodich, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jpnGiaoDichLayout.setVerticalGroup(
             jpnGiaoDichLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpnGiaoDichLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jlbGiaodich, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE))
+            .addComponent(jlbGiaodich, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
         );
 
-        jpnNhanVien.setBackground(new java.awt.Color(231, 154, 22));
+        jpnNhanVien.setBackground(new java.awt.Color(0, 153, 153));
+        jpnNhanVien.setForeground(new java.awt.Color(255, 255, 255));
 
-        jlbNhanVien.setBackground(new java.awt.Color(231, 154, 22));
-        jlbNhanVien.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jlbNhanVien.setBackground(new java.awt.Color(0, 153, 153));
+        jlbNhanVien.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbNhanVien.setForeground(null);
         jlbNhanVien.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlbNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Clien list.png"))); // NOI18N
         jlbNhanVien.setText("NHÂN VIÊN");
+        jlbNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jlbNhanVienMouseEntered(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpnNhanVienLayout = new javax.swing.GroupLayout(jpnNhanVien);
         jpnNhanVien.setLayout(jpnNhanVienLayout);
@@ -124,10 +128,12 @@ public class GiaoDienQuanLy extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jpnSanPham.setBackground(new java.awt.Color(231, 154, 22));
+        jpnSanPham.setBackground(new java.awt.Color(0, 153, 153));
+        jpnSanPham.setForeground(new java.awt.Color(255, 255, 255));
 
-        jlbSanPham.setBackground(new java.awt.Color(231, 154, 22));
-        jlbSanPham.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jlbSanPham.setBackground(new java.awt.Color(0, 153, 153));
+        jlbSanPham.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbSanPham.setForeground(null);
         jlbSanPham.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlbSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Label.png"))); // NOI18N
         jlbSanPham.setText("SẢN PHẨM");
@@ -149,10 +155,12 @@ public class GiaoDienQuanLy extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jpnDoiTra.setBackground(new java.awt.Color(231, 154, 22));
+        jpnDoiTra.setBackground(new java.awt.Color(0, 153, 153));
+        jpnDoiTra.setForeground(new java.awt.Color(255, 255, 255));
 
-        jlbDoiTra.setBackground(new java.awt.Color(231, 154, 22));
-        jlbDoiTra.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jlbDoiTra.setBackground(new java.awt.Color(0, 153, 153));
+        jlbDoiTra.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbDoiTra.setForeground(null);
         jlbDoiTra.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlbDoiTra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Refresh.png"))); // NOI18N
         jlbDoiTra.setText("TRẢ HÀNG");
@@ -174,10 +182,12 @@ public class GiaoDienQuanLy extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jpnDoiMatKhau.setBackground(new java.awt.Color(231, 154, 22));
+        jpnDoiMatKhau.setBackground(new java.awt.Color(0, 153, 153));
+        jpnDoiMatKhau.setForeground(new java.awt.Color(255, 255, 255));
 
-        jlbDoiMatKhau.setBackground(new java.awt.Color(231, 154, 22));
-        jlbDoiMatKhau.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jlbDoiMatKhau.setBackground(new java.awt.Color(0, 153, 153));
+        jlbDoiMatKhau.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbDoiMatKhau.setForeground(null);
         jlbDoiMatKhau.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlbDoiMatKhau.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Clipboard.png"))); // NOI18N
         jlbDoiMatKhau.setText("ĐỔI MẬT KHẨU");
@@ -188,7 +198,7 @@ public class GiaoDienQuanLy extends javax.swing.JFrame {
             jpnDoiMatKhauLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnDoiMatKhauLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jlbDoiMatKhau, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jlbDoiMatKhau, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jpnDoiMatKhauLayout.setVerticalGroup(
@@ -199,10 +209,12 @@ public class GiaoDienQuanLy extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jpnThongKe.setBackground(new java.awt.Color(231, 154, 22));
+        jpnThongKe.setBackground(new java.awt.Color(0, 153, 153));
+        jpnThongKe.setForeground(new java.awt.Color(255, 255, 255));
 
-        jlbThongKe.setBackground(new java.awt.Color(231, 154, 22));
-        jlbThongKe.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jlbThongKe.setBackground(new java.awt.Color(0, 153, 153));
+        jlbThongKe.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbThongKe.setForeground(null);
         jlbThongKe.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlbThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Best.png"))); // NOI18N
         jlbThongKe.setText("THỐNG KÊ");
@@ -224,12 +236,14 @@ public class GiaoDienQuanLy extends javax.swing.JFrame {
                 .addGap(11, 11, 11))
         );
 
-        jpnThoat.setBackground(new java.awt.Color(231, 154, 22));
+        jpnThoat.setBackground(new java.awt.Color(0, 153, 153));
 
-        btn_thoat.setBackground(new java.awt.Color(231, 154, 22));
-        btn_thoat.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        btn_thoat.setBackground(new java.awt.Color(0, 153, 153));
+        btn_thoat.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btn_thoat.setForeground(new java.awt.Color(255, 255, 255));
         btn_thoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Exit.png"))); // NOI18N
         btn_thoat.setText("THOÁT");
+        btn_thoat.setBorder(null);
         btn_thoat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_thoatActionPerformed(evt);
@@ -240,17 +254,19 @@ public class GiaoDienQuanLy extends javax.swing.JFrame {
         jpnThoat.setLayout(jpnThoatLayout);
         jpnThoatLayout.setHorizontalGroup(
             jpnThoatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btn_thoat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btn_thoat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jpnThoatLayout.setVerticalGroup(
             jpnThoatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btn_thoat, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
+            .addComponent(btn_thoat, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
         );
 
-        jpnHoaDon.setBackground(new java.awt.Color(231, 154, 22));
+        jpnHoaDon.setBackground(new java.awt.Color(0, 153, 153));
+        jpnHoaDon.setForeground(new java.awt.Color(255, 255, 255));
 
-        jlbHoaDon.setBackground(new java.awt.Color(231, 154, 22));
-        jlbHoaDon.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jlbHoaDon.setBackground(new java.awt.Color(0, 153, 153));
+        jlbHoaDon.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbHoaDon.setForeground(null);
         jlbHoaDon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlbHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/List.png"))); // NOI18N
         jlbHoaDon.setText("HÓA ĐƠN");
@@ -287,16 +303,16 @@ public class GiaoDienQuanLy extends javax.swing.JFrame {
             .addComponent(jpnThoat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jpnHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jpnMain1111Layout.createSequentialGroup()
-                .addGap(56, 56, 56)
+                .addGap(52, 52, 52)
                 .addComponent(jLabel1)
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         jpnMain1111Layout.setVerticalGroup(
             jpnMain1111Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnMain1111Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(38, 38, 38)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jpnGiaoDich, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jpnNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -311,18 +327,20 @@ public class GiaoDienQuanLy extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jpnThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jpnThoat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jpnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel12.setText("PHẦN MỀM QUẢN LÝ CỬA HÀNG GIÀY SNEAKER");
+        jLabel12.setText("PHẦN MỀM BÁN GIÀY SNEAKER");
+
+        jdeskTop.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jdeskTopLayout = new javax.swing.GroupLayout(jdeskTop);
         jdeskTop.setLayout(jdeskTopLayout);
         jdeskTopLayout.setHorizontalGroup(
             jdeskTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1099, Short.MAX_VALUE)
+            .addGap(0, 1073, Short.MAX_VALUE)
         );
         jdeskTopLayout.setVerticalGroup(
             jdeskTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -335,7 +353,7 @@ public class GiaoDienQuanLy extends javax.swing.JFrame {
             jpnViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnViewLayout.createSequentialGroup()
                 .addComponent(jdeskTop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 18, Short.MAX_VALUE))
+                .addGap(0, 11, Short.MAX_VALUE))
         );
         jpnViewLayout.setVerticalGroup(
             jpnViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -352,18 +370,18 @@ public class GiaoDienQuanLy extends javax.swing.JFrame {
                 .addComponent(jpnMain1111, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(106, 106, 106)
-                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jpnView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(153, Short.MAX_VALUE))
+                        .addComponent(jpnView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(366, 366, 366)
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jpnMain1111, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(24, 24, 24)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jpnView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -376,6 +394,10 @@ public class GiaoDienQuanLy extends javax.swing.JFrame {
     private void btn_thoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_thoatActionPerformed
         this.dispose();
     }//GEN-LAST:event_btn_thoatActionPerformed
+
+    private void jlbNhanVienMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbNhanVienMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jlbNhanVienMouseEntered
 
     /**
      * @param args the command line arguments

@@ -4,6 +4,7 @@
  */
 package services;
 
+import java.util.List;
 import model.SizeJPN;
 
 
@@ -14,4 +15,7 @@ import model.SizeJPN;
  */
 public interface SizeService {
     String Add(SizeJPN s);
+    List<SizeJPN> getAll();
+    String delete(String ma);
+
 }

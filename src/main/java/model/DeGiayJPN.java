@@ -52,5 +52,14 @@ public class DeGiayJPN {
         this.doCao = doCao;
     }
 
+    @Override
+    public String toString() {
+        return "DeGiayJPN{" + "id=" + id + ", Made=" + Made + ", chatLieu=" + chatLieu + ", doCao=" + doCao + '}';
+    }
+    
+    public Object[] toDataRow() {
+        return new Object[] {Made, chatLieu, doCao};
+    }
+
     
 }

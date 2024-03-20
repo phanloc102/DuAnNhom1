@@ -4,6 +4,7 @@
  */
 package services.impl;
 
+import java.util.List;
 import model.KieuDangJPN;
 import responsitory.impl.KieuDangRepository;
 import services.KieuDangService;
@@ -26,4 +27,19 @@ public class KieuDangServiceImpl implements KieuDangService{
             return "Thêm Thất Bại";
         }
     }
+
+    @Override
+    public List<KieuDangJPN> getAll() {
+        return kdr.getAll();
+    }
+
+    @Override
+    public String delete(String ma) {
+        boolean upkh = kdr.delete(ma);
+        if(upkh){
+            return "Delete thanh cong";
+        }else{
+            return "Delete that bai";
+        }
+        }
 }

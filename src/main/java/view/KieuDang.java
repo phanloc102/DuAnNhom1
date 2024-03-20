@@ -5,7 +5,12 @@
 package view;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.DeGiayJPN;
+import model.KieuDangJPN;
 import services.impl.KieuDangServiceImpl;
 
 /**
@@ -15,13 +20,26 @@ import services.impl.KieuDangServiceImpl;
 public class KieuDang extends javax.swing.JFrame {
 
     private KieuDangServiceImpl kds = new KieuDangServiceImpl();
+    private DefaultTableModel dtm = new DefaultTableModel();
+   private List<KieuDangJPN> listDg = new ArrayList<>();
     /**
      * Creates new form KieuDang
      */
     public KieuDang() {
         initComponents();
+        jTable1.setModel(dtm);
+        String[] tieuDe = {"Mã kiểu dáng","Tên kiểu dáng"};
+        dtm.setColumnIdentifiers(tieuDe);
+        listDg = new KieuDangServiceImpl().getAll();
+        showData(listDg);
     }
 
+    public void showData(List<KieuDangJPN> list){
+        dtm.setRowCount(0);
+        for (KieuDangJPN deGiayJPN : list) {
+            dtm.addRow(deGiayJPN.toDataRow());
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,7 +55,6 @@ public class KieuDang extends javax.swing.JFrame {
         txtMa = new javax.swing.JTextField();
         txtTen = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        btSua = new javax.swing.JButton();
         btXoa = new javax.swing.JButton();
         btBack = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -58,13 +75,6 @@ public class KieuDang extends javax.swing.JFrame {
         jLabel2.setText("Nhập Mã Kiểu Dáng");
 
         jLabel4.setText("Nhập Tên Kiểu Dáng");
-
-        btSua.setText("Sửa");
-        btSua.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btSuaActionPerformed(evt);
-            }
-        });
 
         btXoa.setText("Xóa");
         btXoa.addActionListener(new java.awt.event.ActionListener() {
@@ -109,20 +119,15 @@ public class KieuDang extends javax.swing.JFrame {
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btBack))
+                            .addComponent(txtTen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btXoa))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(btSua)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(40, 40, 40)
-                                    .addComponent(btAdd2))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(40, 40, 40)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btBack)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(btXoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btAdd2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(80, 80, 80)
@@ -139,22 +144,17 @@ public class KieuDang extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btAdd2))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(btSua)
-                        .addGap(18, 18, 18)
-                        .addComponent(btXoa)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btXoa)
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(7, 7, 7)
                 .addComponent(btBack)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
@@ -166,14 +166,16 @@ public class KieuDang extends javax.swing.JFrame {
         String ten = txtTen.getText();
         model.KieuDangJPN kd = new model.KieuDangJPN(ten, ma);
         JOptionPane.showMessageDialog(this, kds.Add(kd));
+        listDg.add(kd);
+        showData(listDg);
     }//GEN-LAST:event_btAdd2ActionPerformed
-
-    private void btSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSuaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btSuaActionPerformed
 
     private void btXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaActionPerformed
         // TODO add your handling code here:
+        String ma = listDg.get(jTable1.getSelectedRow()).getMa();
+        JOptionPane.showMessageDialog(this, kds.delete(ma));
+        listDg = kds.getAll();
+        showData(listDg);
     }//GEN-LAST:event_btXoaActionPerformed
 
     private void btBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBackActionPerformed
@@ -234,7 +236,6 @@ public class KieuDang extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAdd2;
     private javax.swing.JButton btBack;
-    private javax.swing.JButton btSua;
     private javax.swing.JButton btXoa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

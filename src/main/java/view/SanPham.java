@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.SanPhamJPN;
 import services.impl.SanPhamServiceImpl;
 
 /**
@@ -20,18 +21,27 @@ import services.impl.SanPhamServiceImpl;
 public class SanPham extends javax.swing.JFrame {
 
     private DefaultTableModel dtm = new DefaultTableModel();
-    private List<SanPham> list = new ArrayList<>();
+    private List<SanPhamJPN> list = new ArrayList<>();
     private SanPhamServiceImpl spsi = new SanPhamServiceImpl();
-        private String strAnh = "C:\\Users\\Phan Loc\\Downloads\\PRO1041_DUAN1_BLOCK2 (1)\\src\\main\\resources\\Peace.PNG";
 
     /**
      * Creates new form NewJFrame
      */
     public SanPham() {
         initComponents();
-        
+        jTable1.setModel(dtm);
+        String[] tieuDe = {"Mã sản phẩm", "Tên sản phẩm"};
+        dtm.setColumnIdentifiers(tieuDe);
+        list = new SanPhamServiceImpl().getAll();
+        showData(list);
     }
 
+    public void showData(List<SanPhamJPN> list){
+        dtm.setRowCount(0);
+        for (SanPhamJPN sanPhamJPN : list) {
+            dtm.addRow(sanPhamJPN.toDataRow());
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,7 +58,6 @@ public class SanPham extends javax.swing.JFrame {
         txtTen = new javax.swing.JTextField();
         btAdd = new javax.swing.JButton();
         btBack = new javax.swing.JButton();
-        btSua = new javax.swing.JButton();
         btXoa = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -73,13 +82,6 @@ public class SanPham extends javax.swing.JFrame {
         btBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btBackActionPerformed(evt);
-            }
-        });
-
-        btSua.setText("Sửa");
-        btSua.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btSuaActionPerformed(evt);
             }
         });
 
@@ -108,7 +110,7 @@ public class SanPham extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -125,12 +127,11 @@ public class SanPham extends javax.swing.JFrame {
                                     .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(40, 40, 40)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btBack)
-                                    .addComponent(btAdd)
-                                    .addComponent(btXoa)
-                                    .addComponent(btSua))))))
-                .addContainerGap(26, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btXoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,18 +143,17 @@ public class SanPham extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btAdd))
-                .addGap(10, 10, 10)
-                .addComponent(btSua)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
+                .addComponent(btXoa)
+                .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btXoa))
-                .addGap(31, 31, 31)
+                    .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(3, 3, 3)
                 .addComponent(btBack)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         pack();
@@ -171,14 +171,17 @@ public class SanPham extends javax.swing.JFrame {
 //        String soLuong = txtSL.getText() + "";
         model.SanPhamJPN sp = new model.SanPhamJPN(ma, ten);
         JOptionPane.showMessageDialog(this, spsi.add(sp));
+        list.add(sp);
+        showData(list);
     }//GEN-LAST:event_btAddActionPerformed
-
-    private void btSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSuaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btSuaActionPerformed
 
     private void btXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaActionPerformed
         // TODO add your handling code here:
+        String ma = list.get(jTable1.getSelectedRow()).getId();
+        JOptionPane.showMessageDialog(this, spsi.delete(ma));
+        list = spsi.getAll();
+        showData(list);
+        
     }//GEN-LAST:event_btXoaActionPerformed
 
     /**
@@ -250,7 +253,6 @@ public class SanPham extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAdd;
     private javax.swing.JButton btBack;
-    private javax.swing.JButton btSua;
     private javax.swing.JButton btXoa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

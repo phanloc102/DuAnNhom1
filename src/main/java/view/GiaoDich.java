@@ -260,6 +260,9 @@ public class GiaoDich extends javax.swing.JPanel {
         AddKhachHang = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(0, 153, 153));
+        setForeground(new java.awt.Color(255, 255, 255));
+
         lblAnh.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout lblAnhLayout = new javax.swing.GroupLayout(lblAnh);
@@ -281,8 +284,9 @@ public class GiaoDich extends javax.swing.JPanel {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        btnThanhToan.setBackground(new java.awt.Color(231, 154, 22));
-        btnThanhToan.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
+        btnThanhToan.setBackground(new java.awt.Color(0, 153, 153));
+        btnThanhToan.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnThanhToan.setForeground(new java.awt.Color(255, 255, 255));
         btnThanhToan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tick.png"))); // NOI18N
         btnThanhToan.setText("Thanh Toán");
         btnThanhToan.addActionListener(new java.awt.event.ActionListener() {
@@ -291,7 +295,9 @@ public class GiaoDich extends javax.swing.JPanel {
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(231, 154, 22));
+        jButton4.setBackground(new java.awt.Color(0, 153, 153));
+        jButton4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Warning.png"))); // NOI18N
         jButton4.setText("Hủy Hóa Đơn");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -507,7 +513,9 @@ public class GiaoDich extends javax.swing.JPanel {
             }
         });
 
-        btnLoc.setBackground(new java.awt.Color(231, 154, 22));
+        btnLoc.setBackground(new java.awt.Color(0, 153, 153));
+        btnLoc.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnLoc.setForeground(new java.awt.Color(255, 255, 255));
         btnLoc.setText("Lọc");
         btnLoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

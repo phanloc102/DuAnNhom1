@@ -4,7 +4,9 @@
  */
 package services;
 
+import java.util.List;
 import model.MauSacJPN;
+import model.SizeJPN;
 
 
 
@@ -14,4 +16,6 @@ import model.MauSacJPN;
  */
 public interface MauSacService  {
     String Add(MauSacJPN ms);
+    List<MauSacJPN> getAll();
+    String delete(String ma);
 }

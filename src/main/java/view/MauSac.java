@@ -5,8 +5,11 @@
 package view;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.MauSacJPN;
 import services.impl.MauSacServiceImpl;
 
 /**
@@ -16,13 +19,25 @@ import services.impl.MauSacServiceImpl;
 public class MauSac extends javax.swing.JFrame {
     private DefaultTableModel dtm = new DefaultTableModel();
     private MauSacServiceImpl ms = new MauSacServiceImpl();
+    List<MauSacJPN> list = new ArrayList<>();
     /**
      * Creates new form MauSac
      */
     public MauSac() {
         initComponents();
+        jTable1.setModel(dtm);
+        String[] tieuDe = {"Mã màu sắc","Tên màu sắc"};
+        dtm.setColumnIdentifiers(tieuDe);
+        list = new MauSacServiceImpl().getAll();
+        showData(list);
     }
 
+     public void showData(List<MauSacJPN> list){
+        dtm.setRowCount(0);
+        for (MauSacJPN deGiayJPN : list) {
+            dtm.addRow(deGiayJPN.toDataRow());
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,7 +53,6 @@ public class MauSac extends javax.swing.JFrame {
         txtMa = new javax.swing.JTextField();
         txtTen = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        btSua = new javax.swing.JButton();
         btXoa = new javax.swing.JButton();
         btBack = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -59,13 +73,6 @@ public class MauSac extends javax.swing.JFrame {
         jLabel3.setText("Nhập Tên Màu Sắc");
 
         jLabel5.setText("Nhập Mã Màu Sắc");
-
-        btSua.setText("Sửa");
-        btSua.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btSuaActionPerformed(evt);
-            }
-        });
 
         btXoa.setText("Xóa");
         btXoa.addActionListener(new java.awt.event.ActionListener() {
@@ -102,29 +109,29 @@ public class MauSac extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel5))
-                        .addGap(6, 6, 6)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btBack)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(40, 40, 40)
-                                .addComponent(btAdd))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(38, 38, 38)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btBack)
-                                    .addComponent(btXoa)
-                                    .addComponent(btSua)))))
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel5))
+                                .addGap(6, 6, 6)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(17, 17, 17)
+                                        .addComponent(jLabel1))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(40, 40, 40)
+                                        .addComponent(btAdd))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btXoa))))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
+                        .addGap(16, 16, 16)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,15 +150,13 @@ public class MauSac extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(btSua)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(35, 35, 35)
                         .addComponent(btXoa)))
-                .addGap(18, 18, 18)
+                .addGap(17, 17, 17)
                 .addComponent(btBack)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -163,14 +168,16 @@ public class MauSac extends javax.swing.JFrame {
         String ten = txtTen.getText();
         model.MauSacJPN m = new model.MauSacJPN(ten, ma);
         JOptionPane.showMessageDialog(this, ms.Add(m));
+        list.add(m);
+        showData(list);
     }//GEN-LAST:event_btAddActionPerformed
-
-    private void btSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSuaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btSuaActionPerformed
 
     private void btXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaActionPerformed
         // TODO add your handling code here:
+        String ma = list.get(jTable1.getSelectedRow()).getMa();
+        JOptionPane.showMessageDialog(this, ms.delete(ma));
+        list = ms.getAll();
+        showData(list);
     }//GEN-LAST:event_btXoaActionPerformed
 
     private void btBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBackActionPerformed
@@ -231,7 +238,6 @@ public class MauSac extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAdd;
     private javax.swing.JButton btBack;
-    private javax.swing.JButton btSua;
     private javax.swing.JButton btXoa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;

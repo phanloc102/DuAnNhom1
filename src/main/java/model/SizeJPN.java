@@ -42,5 +42,7 @@ public class SizeJPN {
         this.ma = ma;
     }
 
-    
+    public Object[] toDataRow() {
+        return new Object[] {ma,ten};
+    }
 }

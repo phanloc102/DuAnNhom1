@@ -34,6 +34,9 @@ public interface ChiTietSanPhamService {
     public List<String> getListSize();
 
     public List<String> getListChieuCao();
+    
+    public List<String> getListSanPham();
+
 
     public List<String> getListTrangThai();
 }

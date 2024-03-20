@@ -47,4 +47,7 @@ public class MauSacJPN {
     public void setMa(String ma) {
         this.ma = ma;
     }
+    public Object[] toDataRow() {
+        return new Object[] {ten, ma};
+    }
 }

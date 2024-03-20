@@ -4,7 +4,9 @@
  */
 package services;
 
+import java.util.List;
 import model.KieuDangJPN;
+import model.SizeJPN;
 
 
 
@@ -14,4 +16,6 @@ import model.KieuDangJPN;
  */
 public interface KieuDangService {
     String Add(KieuDangJPN kd);
+    List<KieuDangJPN> getAll();
+    String delete(String ma);
 }

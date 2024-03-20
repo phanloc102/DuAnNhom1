@@ -4,6 +4,7 @@
  */
 package services.impl;
 
+import java.util.List;
 import model.DeGiayJPN;
 import responsitory.impl.DeGiayRepository;
 import services.DegiayService;
@@ -25,5 +26,30 @@ public class DegiayServiceImpl implements DegiayService{
         } else {
             return "Thêm Thất Bại";
         }  
+    }
+
+    @Override
+    public List<DeGiayJPN> getAll() {
+        return dgr.getAll();
+    }
+
+    @Override
+    public String Update(DeGiayJPN dg, String id) {
+        boolean upKh = dgr.Update(dg, id);
+        if(upKh){
+            return "Update thanh cong";
+        }else {
+            return "Update that bai";
+        }
+    }
+
+    @Override
+    public String delete(String ma) {
+        boolean upKh = dgr.delete(ma);
+        if(upKh){
+            return "Delete thanh cong";
+        }else{
+            return "Delete that bai";
+        }
     }
 }

@@ -4,7 +4,6 @@
  */
 package responsitory.impl;
 
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -37,22 +36,54 @@ public class DeGiayRepository {
         }
         return check > 0;
     }
-    
+
     public List<DeGiayJPN> getAll() {
-        List<DeGiayJPN> ls = new ArrayList<>();
-        try(Connection con = DBConnection.getConnection()) {
-            String sql ="SELECT [Id]\n" +
-"      ,[Made]\n" +
-"      ,[Chatlieude]\n" +
-"      ,[Docaode]\n" +
-"  FROM [dbo].[DEGIAY]";
-            PreparedStatement ps = con.prepareStatement(sql);
+        String query = "SELECT[Made]\n"
+                + "      ,[Chatlieude]\n"
+                + "      ,[Docaode]\n"
+                + "  FROM [dbo].[DEGIAY]";
+        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                ls.add(new DeGiayJPN(rs.getString(1), rs.getString(2), rs.getInt(3)));
+            List<DeGiayJPN> list = new ArrayList<>();
+            while (rs.next()) {
+                DeGiayJPN dg = new DeGiayJPN(rs.getString(1), rs.getString(2), rs.getInt(3));
+                list.add(dg);
             }
+            return list;
         } catch (Exception e) {
         }
-        return ls;
+        return null;
+    }
+
+    public boolean Update(DeGiayJPN dg, String id) {
+        String query = "UPDATE [dbo].[DEGIAY]\n"
+                + "   SET [Made] = ?\n"
+                + "      ,[Chatlieude] = ?\n"
+                + "      ,[Docaode] = ?\n"
+                + " WHERE [Id] = ?";
+        int check = 0;
+        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, dg.getMade());
+            ps.setObject(2, dg.getChatLieu());
+            ps.setObject(3, dg.getDoCao());
+            ps.setObject(3, id);
+
+            check = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return check > 0;
+    }
+
+    public boolean delete(String ma) {
+        String query = "DELETE FROM [dbo].[DEGIAY]\n"
+                + "      WHERE Made = ?";
+        int check = 0;
+        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, ma);
+            check = ps.executeUpdate();
+        } catch (Exception e) {
+        }
+        return check > 0;
     }
 }

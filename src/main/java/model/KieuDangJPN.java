@@ -41,4 +41,14 @@ public class KieuDangJPN {
         this.ten = ten;
         this.ma = ma;
     }
+
+    
+
+    @Override
+    public String toString() {
+        return "KieuDangJPN{" + "id=" + id + ", ten=" + ten + ", ma=" + ma + '}';
+    }
+    public Object[] toDataRow() {
+        return new Object[] {ten, ma};
+    }
     }

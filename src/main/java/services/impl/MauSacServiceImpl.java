@@ -4,6 +4,7 @@
  */
 package services.impl;
 
+import java.util.List;
 import model.MauSacJPN;
 import responsitory.impl.MauSacRepository;
 import services.MauSacService;
@@ -26,4 +27,19 @@ public class MauSacServiceImpl implements MauSacService{
             return "Thêm Thất Bại";
         }
     }
+
+    @Override
+    public List<MauSacJPN> getAll() {
+        return msr.getAll();
+    }
+
+    @Override
+    public String delete(String ma) {
+        boolean upkh = msr.delete(ma);
+        if(upkh){
+            return "Delete thanh cong";
+        }else{
+            return "Delete that bai";
+        }
+        }
 }
